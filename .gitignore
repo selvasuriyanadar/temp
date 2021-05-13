@@ -1,1 +1,6 @@
 node_modules
+public/app.bundle.js
+public/app.bundle.js.map
+public/vendor.bundle.js
+public/vendor.bundle.js.map
+public/vendor.bundle.js.LICENSE.txt

@@ -1,8 +1,6 @@
 const express = require('express');
 require('dotenv').config();
 
-const port = process.env.UI_SERVER_PORT || 3000;
-
 const app = express();
 
 const enableHMR = (process.env.ENABLE_HMR || 'true') === 'true';
@@ -23,7 +21,9 @@ if (enableHMR && (process.env.NODE_ENV !== 'production')) {
   app.use(hotMiddleware(compiler));
 }
 
-app.use('/', express.static('public'));
+app.use(express.static('public'));
+
+const port = process.env.UI_SERVER_PORT || 3000;
 
 app.listen(port, function () {
   console.log(`UI server started on port ${port}`);

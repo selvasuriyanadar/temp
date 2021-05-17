@@ -11,7 +11,7 @@ import {
   } from 'react-router-dom';
 
 import MainPage from './components/MainPage.jsx';
-import CompanyForm from './components/CompanyForm.jsx';
+import Forms from './components/Forms.jsx';
 
 export default function App() {
   return (
@@ -33,7 +33,7 @@ export default function App() {
 
       <Switch>
         <Route path="/form">
-          <CompanyForm />
+          <Forms />
         </Route>
         <Route path="/">
           <MainPage />

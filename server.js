@@ -1,4 +1,5 @@
 const express = require('express');
+const { createProxyMiddleware } = require('http-proxy-middleware');
 require('dotenv').config();
 
 const app = express();
@@ -21,7 +22,26 @@ if (enableHMR && (process.env.NODE_ENV !== 'production')) {
   app.use(hotMiddleware(compiler));
 }
 
-app.use('/', express.static('public'));
+app.use(express.static('public'));
+
+const server_to_client_env = {
+  UI_API_ENDPOINT: process.env.UI_API_ENDPOINT,
+};
+
+app.get('/env.js', (req, res) => {
+  res.send(`window.SERVER_TO_CLIENT_ENV = ${JSON.stringify(server_to_client_env)}`);
+});
+
+const apiProxyTarget = process.env.API_PROXY_TARGET;
+
+if (apiProxyTarget) {
+  app.use(createProxyMiddleware(
+  '/api/**',
+  {
+    target: apiProxyTarget,
+    changeOrigin: true
+  }));
+}
 
 const port = process.env.UI_SERVER_PORT || 3000;
 

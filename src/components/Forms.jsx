@@ -2,6 +2,7 @@ import React from "react";
 import Form from "./Form.jsx";
 import { FormData } from "../data/FormData.js";
 import FormTable from "./FormTable.jsx";
+import axios from 'axios';
 
 export default class Forms extends React.Component {
 
@@ -37,6 +38,10 @@ export default class Forms extends React.Component {
     this.setState({ mode });
   };
 
+  submitForm = () => {
+    axios.post('/api/company-form-set', this.state.forms);
+  };
+
   render() {
     const mode = this.state.mode;
     const forms = this.state.forms;
@@ -55,6 +60,7 @@ export default class Forms extends React.Component {
         <br />
         <button onClick={this.changeMode}>{mode.next.value}</button>
         <button onClick={this.createForm}>New Form</button>
+        <button onClick={this.submitForm}>Submit Form</button>
       </div>
     );
   }

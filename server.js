@@ -1,7 +1,6 @@
 const express = require('express');
 const { createProxyMiddleware } = require('http-proxy-middleware');
 require('dotenv').config();
-
 const app = express();
 
 const enableHMR = (process.env.ENABLE_HMR || 'true') === 'true';

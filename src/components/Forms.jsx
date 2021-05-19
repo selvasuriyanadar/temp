@@ -39,7 +39,7 @@ export default class Forms extends React.Component {
   };
 
   submitForm = () => {
-    axios.post('/api/company-form-set', this.state.forms);
+    axios.post('http://localhost:8000/company-form-set', this.state.forms);
   };
 
   render() {
